@@ -11,6 +11,8 @@
     $ime = $_POST["ime"];
     $prezime = $_POST["prezime"];
     $password = $_POST["password"];
+    $razred = $_POST["razred"];
+    $odeljenje = $_POST["odeljenje"];
 
     //proveri da li postoji jmbg
     $jmbgcheckquery = "SELECT jmbg FROM ucenici WHERE jmbg = '" . $jmbg . "';";
@@ -23,11 +25,11 @@
     }
 
     //encryption
-    $salt = "\$5\$rounds=5000\$" . "idegas" . $username . "\$"; 
+    $salt = "\$5\$rounds=5000\$" . "idegas" . $ime . "\$"; 
     $hash = crypt($password, $salt);
 
-    $insertuserquery = "INSERT INTO ucenici (jmbg, ime, prezime, hash, salt, verifikacija) 
-        VALUES ( '" . $jmbg ."', '" . $ime . "', '" . $prezime. "' , '" . $hash ."', '" . $salt . "', '" . 0 . "');";
+    $insertuserquery = "INSERT INTO ucenici (jmbg, ime, prezime, hash, salt, razred, odeljenje, verifikacija) 
+        VALUES ( '" . $jmbg ."', '" . $ime . "', '" . $prezime. "' , '" . $hash ."', '" . $salt . "' , '" . $razred . "' , '" . $odeljenje . "', '" . 0 . "');";
     mysqli_query($con, $insertuserquery) or die("4: insert ucenici query failed"); // error code #4 - insert query faield
 
     echo("0");

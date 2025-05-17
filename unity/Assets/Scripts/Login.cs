@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Login : MonoBehaviour
 {
@@ -28,11 +29,7 @@ public class Login : MonoBehaviour
             DBManager.jmbg = jmbgField.text;
 
             //uzmi ocene
-            WWWForm form2 = new WWWForm();
-            form2.AddField("jmbg", jmbgField.text);
-            WWW www2 = new WWW("http://localhost/sqlconnect/extract_info.php", form2);
-            yield return www2;
-            DBManager.ocene = www2.text;
+            yield return StartCoroutine(DBManager.UpdateOcene());
 
             UnityEngine.SceneManagement.SceneManager.LoadScene(0);
         }
@@ -40,6 +37,11 @@ public class Login : MonoBehaviour
         {
             Debug.Log("User login failed error number #" + www.text);
         }
+    }
+
+    public void LoginProfesor()
+    {
+        SceneManager.LoadScene("LoginProfesor");
     }
     
     public void VerifyInputs()

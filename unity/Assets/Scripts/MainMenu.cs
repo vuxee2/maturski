@@ -4,7 +4,6 @@ using TMPro;
 public class MainMenu : MonoBehaviour
 {
     public TMP_Text jmbg;
-    public TMP_Text ocene;
     public GameObject loginRegisterPanel;
     void Start()
     {
@@ -15,7 +14,7 @@ public class MainMenu : MonoBehaviour
         }
         else
         {
-            loginRegisterPanel.SetActive(false);
+            loginRegisterPanel.SetActive(true);
         }
     }
 

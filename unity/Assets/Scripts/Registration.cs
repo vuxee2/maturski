@@ -2,12 +2,16 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 public class Registration : MonoBehaviour
 {
     public TMP_InputField jmbgField;
     public TMP_InputField imeField;
     public TMP_InputField prezimeField;
     public TMP_InputField passwordField;
+
+    public TMP_Dropdown razredDropdown;
+    public TMP_Dropdown odeljenjeDropdown;
 
     public Button submitButton;
 
@@ -23,6 +27,8 @@ public class Registration : MonoBehaviour
         form.AddField("ime", imeField.text);
         form.AddField("prezime", prezimeField.text);
         form.AddField("password", passwordField.text);
+        form.AddField("razred", razredDropdown.value + 1);
+        form.AddField("odeljenje", odeljenjeDropdown.value + 1);
         WWW www = new WWW("http://localhost/sqlconnect/register.php", form);
         yield return www;
         if(www.text == "0")
@@ -39,6 +45,11 @@ public class Registration : MonoBehaviour
     public void VerifyInputs()
     {
         submitButton.interactable = (imeField.text.Length >= 3 &&  prezimeField.text.Length >= 3 && passwordField.text.Length >= 8 && jmbgField.text.Length == 13 && IsOnlyNumbers(jmbgField.text));
+    }
+
+    public void RegisterProfesor()
+    {
+        SceneManager.LoadScene("RegisterProfesor");
     }
 
     bool IsOnlyNumbers(string text)

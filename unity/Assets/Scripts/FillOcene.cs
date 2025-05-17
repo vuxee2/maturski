@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 using System.Text.RegularExpressions;
 using TMPro;
 public class FillOcene : MonoBehaviour
@@ -10,9 +11,19 @@ public class FillOcene : MonoBehaviour
 
     private string oceneTemp;
 
-    void Start()
+    private void OnEnable()
     {
+        StartCoroutine(LoadAndDisplayOcene());
+    }
+    private IEnumerator LoadAndDisplayOcene()
+    {
+        yield return StartCoroutine(DBManager.UpdateOcene());
         oceneTemp = DBManager.ocene;
+
+        foreach (Transform child in ScrollViewContent)
+        {
+            Destroy(child.gameObject);
+        }
 
         var subjectMap = new Dictionary<string, string>()
         {
