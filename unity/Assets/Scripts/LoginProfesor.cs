@@ -10,6 +10,8 @@ public class LoginProfesor : MonoBehaviour
 
     public Button submitButton;
 
+    public GameObject sceneTransition;
+
     public void CallLogin()
     {
         StartCoroutine(LoginUser());
@@ -46,7 +48,16 @@ public class LoginProfesor : MonoBehaviour
         }
     }
 
-    
+    public void LoginUcenik()
+    {
+        StartCoroutine(ChangeScene("LoginMenu"));
+    }
+    private IEnumerator ChangeScene(string sceneName)
+    {
+        Instantiate(sceneTransition, transform.position, transform.rotation);
+        yield return new WaitForSeconds(.3f);
+        SceneManager.LoadScene(sceneName);
+    }
     public void VerifyInputs()
     {
         submitButton.interactable = (passwordField.text.Length >= 8);

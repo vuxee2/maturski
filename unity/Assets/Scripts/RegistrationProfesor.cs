@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 public class RegistrationProfesor : MonoBehaviour
 {
     public TMP_InputField imeField;
@@ -11,7 +12,9 @@ public class RegistrationProfesor : MonoBehaviour
     public TMP_InputField mailField;
 
     public Button submitButton;
-    
+
+    public GameObject sceneTransition;
+
     public void CallRegister()
     {
         StartCoroutine(Register());
@@ -27,7 +30,7 @@ public class RegistrationProfesor : MonoBehaviour
         form.AddField("mail", mailField.text);
         WWW www = new WWW("http://localhost/sqlconnect/register_profesor.php", form);
         yield return www;
-        if(www.text == "0")
+        if (www.text == "0")
         {
             Debug.Log("Your user creation request has been sent successfully. Please wait for the admin's approval.");
             UnityEngine.SceneManagement.SceneManager.LoadScene(0);
@@ -40,6 +43,18 @@ public class RegistrationProfesor : MonoBehaviour
 
     public void VerifyInputs()
     {
-        submitButton.interactable = (imeField.text.Length >= 3 &&  prezimeField.text.Length >= 3 && passwordField.text.Length >= 8);
+        submitButton.interactable = (imeField.text.Length >= 3 && prezimeField.text.Length >= 3 && passwordField.text.Length >= 8);
+    }
+
+    public void RegisterUcenik()
+    {
+        StartCoroutine(ChangeScene("RegisterMenu"));
+    }
+    
+    private IEnumerator ChangeScene(string sceneName)
+    {
+        Instantiate(sceneTransition, transform.position, transform.rotation);
+        yield return new WaitForSeconds(.3f);
+        SceneManager.LoadScene(sceneName);
     }
 }

@@ -34,7 +34,7 @@ public class FillOcene : MonoBehaviour
             {"fiz", "Физика"},
             {"nem", "Немачки језик"},
             {"asa", "Анализа са алгебром"},
-            //treba se doda jos, mrzi me sad malo
+            //treba se doda jos
         };
 
         var matches = Regex.Matches(oceneTemp, @"([a-zA-Z]+)(\d)");

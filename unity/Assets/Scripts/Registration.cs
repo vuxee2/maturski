@@ -15,6 +15,8 @@ public class Registration : MonoBehaviour
 
     public Button submitButton;
 
+    public GameObject sceneTransition;
+
     public void CallRegister()
     {
         StartCoroutine(Register());
@@ -49,7 +51,14 @@ public class Registration : MonoBehaviour
 
     public void RegisterProfesor()
     {
-        SceneManager.LoadScene("RegisterProfesor");
+        StartCoroutine(ChangeScene("RegisterProfesor"));
+    }
+
+    private IEnumerator ChangeScene(string sceneName)
+    {
+        Instantiate(sceneTransition, transform.position, transform.rotation);
+        yield return new WaitForSeconds(.3f);
+        SceneManager.LoadScene(sceneName);
     }
 
     bool IsOnlyNumbers(string text)

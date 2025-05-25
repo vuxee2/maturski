@@ -11,6 +11,8 @@ public class Login : MonoBehaviour
 
     public Button submitButton;
 
+    public GameObject sceneTransition;
+
 
     public void CallLogin()
     {
@@ -41,7 +43,13 @@ public class Login : MonoBehaviour
 
     public void LoginProfesor()
     {
-        SceneManager.LoadScene("LoginProfesor");
+        StartCoroutine(ChangeScene("LoginProfesor"));
+    }
+    private IEnumerator ChangeScene(string sceneName)
+    {
+        Instantiate(sceneTransition, transform.position, transform.rotation);
+        yield return new WaitForSeconds(.3f);
+        SceneManager.LoadScene(sceneName);
     }
     
     public void VerifyInputs()
