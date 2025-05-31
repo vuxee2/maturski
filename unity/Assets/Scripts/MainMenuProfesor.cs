@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using System.Collections;
+using System;
 public class MainMenuProfesor : MonoBehaviour
 {
     public TMP_Text mail;
@@ -55,12 +56,13 @@ public class MainMenuProfesor : MonoBehaviour
         selectedJMBG = jmbg;
     }
 
-    public IEnumerator AddOcenaUceniku(string jmbg, string kod_predmeta, int ocena)
+    public IEnumerator AddOcenaUceniku(string jmbg, string kod_predmeta, int ocena, string datum)
     {
         WWWForm form = new WWWForm();
         form.AddField("jmbg", jmbg);
         form.AddField("predmet", kod_predmeta);
         form.AddField("ocena", ocena);
+        form.AddField("datum", datum);
 
         WWW www = new WWW("http://localhost/sqlconnect/add_ocena_ucenik.php", form);
         yield return www;
@@ -83,6 +85,6 @@ public class MainMenuProfesor : MonoBehaviour
 
     public void AddOcenaUcenik()
     {
-        StartCoroutine(AddOcenaUceniku(selectedJMBG, DBManagerProfesor.kod_predmeta, ocenaDropDown.value + 1));
+        StartCoroutine(AddOcenaUceniku(selectedJMBG, DBManagerProfesor.kod_predmeta, ocenaDropDown.value + 1, DateTime.Now.ToString("yyyy-MM-dd")));
     }
 }

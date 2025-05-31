@@ -37,19 +37,24 @@ public class FillOcene : MonoBehaviour
             //treba se doda jos
         };
 
-        var matches = Regex.Matches(oceneTemp, @"([a-zA-Z]+)(\d)");
+        // Regex koji hvata predmet, ocenu i datum (npr. mat5(2025-05-31))
+        var matches = Regex.Matches(oceneTemp, @"([a-zA-Z]+)(\d)\(([\d\-]+)\)");
 
         foreach (Match match in matches)
         {
             string subjectCode = match.Groups[1].Value;
             string grade = match.Groups[2].Value;
+            string date = match.Groups[3].Value;
 
             var instance = Instantiate(OcenaPref, ScrollViewContent);
 
             var subjectText = instance.transform.Find("PredmetTXT").GetComponent<TextMeshProUGUI>();
             var gradeText = instance.transform.Find("OcenaTXT").GetComponent<TextMeshProUGUI>();
+            var dateText = instance.transform.Find("DatumTXT").GetComponent<TextMeshProUGUI>();
 
             gradeText.text = grade;
+            dateText.text = date;
+            
             if (subjectMap.ContainsKey(subjectCode))
             {
                 subjectText.text = subjectMap[subjectCode];

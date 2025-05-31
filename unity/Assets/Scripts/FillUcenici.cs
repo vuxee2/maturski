@@ -43,7 +43,6 @@ public class FillUcenici : MonoBehaviour
                 string jmbg = parts[0];
                 string ime = parts[1];
                 string prezime = parts[2];
-                // Po potrebi možeš uzeti i razred i odeljenje iz parts[2] i parts[3]
 
                 GameObject noviObjekat = Instantiate(UcenikPref, ScrollViewContent);
                 TMP_Text textComponent = noviObjekat.GetComponentInChildren<TMP_Text>();

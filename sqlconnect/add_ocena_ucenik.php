@@ -8,11 +8,13 @@ if (mysqli_connect_errno()) {
 $jmbg = $_POST["jmbg"];
 $predmet = $_POST["predmet"];
 $ocena = $_POST["ocena"];
+$datum = $_POST["datum"]; 
 
 // Escape
 $jmbg = mysqli_real_escape_string($con, $jmbg);
 $predmet = mysqli_real_escape_string($con, $predmet);
 $ocena = mysqli_real_escape_string($con, $ocena);
+$datum = mysqli_real_escape_string($con, $datum);
 
 // Dohvati trenutne ocene
 $query = "SELECT ocene FROM ucenici WHERE jmbg = '$jmbg'";
@@ -27,8 +29,8 @@ if(mysqli_num_rows($result) != 1)
 $row = mysqli_fetch_assoc($result);
 $ocene = $row["ocene"];
 
-// Dodaj novu ocenu na kraj stringa
-$ocene .= $predmet . $ocena;
+// Format: [predmet][ocena]([datum])
+$ocene .= $predmet . $ocena . "(" . $datum . ")";
 
 // Upisi nazad
 $updateQuery = "UPDATE ucenici SET ocene = '$ocene' WHERE jmbg = '$jmbg'";
