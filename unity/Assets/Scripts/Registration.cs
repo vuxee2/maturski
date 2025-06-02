@@ -35,7 +35,7 @@ public class Registration : MonoBehaviour
         yield return www;
         if(www.text == "0")
         {
-            Debug.Log("Your user creation request has been sent successfully. Please wait for the admin's approval.");
+            Debug.Log("Uspešno poslat zahtev za registraciju");
             UnityEngine.SceneManagement.SceneManager.LoadScene(0);
         }
         else

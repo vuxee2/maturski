@@ -34,7 +34,7 @@ public class FillOcene : MonoBehaviour
             {"fiz", "Физика"},
             {"nem", "Немачки језик"},
             {"asa", "Анализа са алгебром"},
-            //treba se doda jos
+            //...
         };
 
         // Regex koji hvata predmet, ocenu i datum (npr. mat5(2025-05-31))

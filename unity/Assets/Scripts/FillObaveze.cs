@@ -61,8 +61,8 @@ public class FillObaveze : MonoBehaviour
                 TMP_Text[] texts = obj.GetComponentsInChildren<TMP_Text>();
                 if (texts.Length >= 2)
                 {
-                    texts[0].text = obaveza.tekst;
-                    texts[1].text = obaveza.predmet;
+                    texts[1].text = obaveza.tekst;
+                    texts[0].text = obaveza.predmet;
                 }
                 else if (texts.Length == 1)
                 {
